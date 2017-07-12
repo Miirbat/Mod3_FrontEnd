@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src='src/notesList.js'></script>
+    <script type="text/javascript" src='src/note.js'></script>
+    <script type="text/javascript" src='src/adapter.js'></script>
+    <script type="text/javascript" src='src/index.js'></script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      $('.visible.example .ui.sidebar')
+        .sidebar({
+          context: '.visible.example .bottom.segment'
+        })
+        .sidebar('hide')
+    </script>
+
+    <div class="ui bottom attached segment pushable">
+      <div class="ui visible inverted left vertical sidebar menu">
+        <a class="item">
+          <i class="home icon"></i>
+          Home
+        </a>
+        <a class="item">
+          <i class="write icon" id=""></i>
+          Create New Note
+        </a>
+        <a class="item">
+          <i class="browser icon"></i>
+          All Your Notes
+          <ul id="notes-list">
+          </ul>
+        </a>
+      </div>
+
+      <div class="pusher">
+        <div class="ui basic segment">
+          <h3 class="ui header">Create a new note</h3>
+            <div class="new-note">
+
+              <form id="create-note">
+                <label>Title</label><br>
+                <input type="text" id="noteTitle"></input><br>
+                <label>Your note:</label><br>
+                <input type="text" id="noteBody"></input><br><br>
+                <input type="submit" name="submit" id='submit-new-note' value="Create"></input>
+              </form>
+            </div>
+
+            <div id="one-note">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </body>
+</html>
