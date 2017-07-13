@@ -6,6 +6,7 @@ $(document).ready(
   createNote()
   adapter.getNotes(successCallbackGet)
   selectingANote()
+  editEventListener()
 })
 
 function createNote() {
@@ -47,3 +48,28 @@ function createNote() {
       let noteList = new NotesList()
       $( "#whole-notes" ).html(noteList.renderWholeNote(data));
     }
+
+
+    function editEventListener(){
+      $('#edit-note').on("submit", function(e){
+        debugger
+        e.preventDefault()
+        alert("I've been clicked!")
+      })
+    }
+
+    // function editNote() {
+    //   $('somewhere').on("submit", function(e) {
+    //     e.preventDefault()
+    //     let noteTitle = $('somewhere').val()
+    //     let noteBody = $('somewhere').val()
+    //     let newObj = {
+    //                   user_id: 1,
+    //                   title: noteTitle,
+    //                   body: noteBody
+    //                   }
+    //     adapter.editNote(ID#, newObj, successCallbackPatch)
+    //     // then render whole note or something like that
+    //
+    //     //need to get a working edit button somehow
+    //   })}

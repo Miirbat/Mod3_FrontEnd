@@ -36,5 +36,19 @@ class Adapter {
     .catch(error => console.log(error))
   }
 
+  editANote(idizzle, editedPost, callback){
+    let url = `http://localhost:3000/api/v1/notes/${idizzle}`
+    fetch(url, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(editedPost)
+    })
+    .then(response => response.json())
+    .then(function(data){
+      console.log(data)
+    })
+    .then(callback)
+    .catch(error => console.log(error))
+  }
 
 }
