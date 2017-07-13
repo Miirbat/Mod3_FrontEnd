@@ -3,11 +3,17 @@ const adapter = new Adapter()
 
 $(document).ready(
   function(){
+  $(".new-note").hide()
+  $("#editing-notes").hide()
+  newNoteButtonListener()
   createNote()
   adapter.getNotes(successCallbackGet)
   selectingANote()
   editEventListener()
+  sendChangesToDB()
 })
+
+
 
 function createNote() {
   $('#create-note').on("submit", function(e) {
@@ -17,6 +23,8 @@ function createNote() {
     adapter.postNote(noteTitle, noteBody, successCallbackPost)
     $('#create-note #noteTitle').val('')
     $('#create-note #noteBody').val('')
+    $(".new-note").hide()
+
   })}
 
   function successCallbackPost() {
@@ -39,22 +47,52 @@ function createNote() {
          if (e.target === e.currentTarget){
            return;
          }
+        //  $( "#add-edit-button" ).remove('<button type="button" id="edit-a-note">Edit</button>')
         let idizzle = parseInt(e.target.dataset.id)
         adapter.getOneNote(idizzle, successCallbackGetWholeNote)
       })
     }
 
+
     function successCallbackGetWholeNote(data){
       let noteList = new NotesList()
-      $( "#whole-notes" ).html(noteList.renderWholeNote(data));
+      $( "#whole-notes" ).html(noteList.renderWholeNote(data))
+      $( "#editing-notes" ).html(noteList.renderEditNote(data))
     }
 
 
     function editEventListener(){
-      $('#edit-note').on("submit", function(e){
-        debugger
+      $('#whole-notes').on("click",'#edit-note', function(e){
         e.preventDefault()
-        alert("I've been clicked!")
+        $("#editing-notes").show()
+      })
+    }
+
+    function sendChangesToDB(){
+      let noteList = new NotesList()
+      $("#editing-notes").on("click","#edit-note", function(e){
+        e.preventDefault()
+        let idizzle = parseInt(e.target.dataset.id)
+        let noteTitle = $('#edit-note #noteTitle').val()
+        let noteBody = $('#myTextArea').val()
+        let newObj = {
+                      user_id: 1,
+                      title: noteTitle,
+                      body: noteBody
+                    }
+        adapter.editNote(idizzle, newObj, editSuccessCallback)
+      })
+    }
+
+    function editSuccessCallback(data){
+      alert("yeah!!")
+    }
+
+
+    function newNoteButtonListener(){
+      $('#new-note-btn').on("click", function(e){
+        e.preventDefault();
+        $(".new-note").show()
       })
     }
 

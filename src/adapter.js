@@ -36,7 +36,7 @@ class Adapter {
     .catch(error => console.log(error))
   }
 
-  editANote(idizzle, editedPost, callback){
+  editNote(idizzle, editedPost, callback){
     let url = `http://localhost:3000/api/v1/notes/${idizzle}`
     fetch(url, {
       method: 'PATCH',
@@ -50,5 +50,6 @@ class Adapter {
     .then(callback)
     .catch(error => console.log(error))
   }
+
 
 }

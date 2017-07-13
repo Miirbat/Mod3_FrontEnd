@@ -12,25 +12,31 @@ class NotesList {
     return this.notes.map(note => note.renderShortNote())
   }
 
-  // renderWholeNote(data) {
-  //   return(
-  //    `<a class="whole-note">
-  //      <b class="note-title" font size="8">${data.title}</b> <br>
-  //     <span class="note-body">${data.body}</span> <br><br>
-  //     <input type="submit" name="edit" id='edit-note' value="Edit"></input>
-  //     </a>`
-  //   )
-  //  }
+  renderWholeNote(data) {
+    return(`
+        <a class="whole-note" data-id=${data.id} >
+            <b id="note-title">${data.title}</b><br>
+            <span id="note-body">${data.body}</span><br>
+            <input type="submit" id="edit-note" data-id=${data.id} value="Edit">
+        </a>
+      `)
+     }
 
-   renderWholeNote(data){
+    //  renderEditButton(){
+    //    return(`<button type="button" id="edit-a-note">Edit</button>`)
+    //  }
+
+
+   renderEditNote(data){
      return(
-     `<form id="edit-note">
-       Your Title: <input type="text" id="noteTitle" value ="${data.title}"> </input></br>
+     `<form id="edit-note" data-id=${data.id}>
+       <input type="text" id="noteTitle" value=${data.title}></input></br>
      </form>
-     <textarea id="text-area" rows="12" cols="60">
+     <textarea id="myTextArea" rows="5" cols="40">
        ${data.body}
      </textarea><br>
-     <input type="submit" id="submit-changes" value="Save Changes"> `)
+     <input type="submit" id="edit-note" data-id=${data.id} value="Save Changes">
+     `)
    }
 
   }

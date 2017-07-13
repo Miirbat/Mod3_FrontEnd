@@ -30,13 +30,41 @@
 
         <style>
         #robot-img{
-        left: 20px
+          left: 20px
+        }
+        #new-note-btn{
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          left: 20x;
+        }
+
+        #edit-a-note{
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          left: 20x;
         }
         </style>
 
       <div id='robot-img' class="item">
           <img src="https://robohash.org/NOI.png?set=set2&size=150x150" alt="Smiley face">
       </div>
+      <br>
 
         <!-- <a class="item">
           <i class="home icon"></i>
@@ -53,6 +81,11 @@
             All Your Notes
           </a> -->
 
+          <button type="button" id="new-note-btn">New Note</button>
+          <br>
+
+          <br>
+
           <ul id="notes-list">
           </ul>
 
@@ -60,8 +93,7 @@
 
       <div class="pusher">
         <div class="ui basic segment">
-
-          <h3 class="ui header">Create a new note</h3>
+          <!-- <h3 class="ui header">Create a new note</h3> -->
             <div class="new-note">
               <form id="create-note">
                 <label>Title</label><br>
@@ -72,8 +104,11 @@
               </form>
             </div>
 
-            <div id="whole-notes">
 
+            <div id="whole-notes">
+            </div>
+
+            <div id="editing-notes">
             </div>
 
 
