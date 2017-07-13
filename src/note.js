@@ -16,15 +16,4 @@ class Note {
         )
       }
 
-    // renderWholeNote() {
-    //   return(
-    //    `<a class="whole-note">
-    //      <b class="note-title" font size="8">${this.title}:</b><br>
-    //     <span class="note-body">${this.body}</span><br><br>
-    //     <input type="submit" name="edit" id='edit-note' value="Edit"></input>
-    //     </a>
-    //     `
-    //      )
-    //  }
-
 }

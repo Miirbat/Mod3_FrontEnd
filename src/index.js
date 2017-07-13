@@ -5,6 +5,7 @@ $(document).ready(
   function(){
   $(".new-note").hide()
   $("#editing-notes").hide()
+  $("#success").hide()
   newNoteButtonListener()
   createNote()
   adapter.getNotes(successCallbackGet)
@@ -12,7 +13,6 @@ $(document).ready(
   editEventListener()
   sendChangesToDB()
 })
-
 
 
 function createNote() {
@@ -24,30 +24,38 @@ function createNote() {
     $('#create-note #noteTitle').val('')
     $('#create-note #noteBody').val('')
     $(".new-note").hide()
+  })
+}
 
-  })}
 
   function successCallbackPost() {
-      adapter.getNotes(successCallbackGet)
+    adapter.getNotes(successCallbackGet)
   }
 
     function successCallbackGet(data){
       let notesList = new NotesList()
+      let idizzle = data[data.length-1].id
+      let noteTitle = data[data.length-1].title
+      let noteBody = data[data.length-1].body
+      let obj = {id: idizzle, title: noteTitle, body: noteBody}
       data.forEach(
         noteItem => {
           notesList.addNote(noteItem.title, noteItem.body, noteItem.id)
       })
-      $( "#notes-list" ).html(notesList.renderShortNotesList());
+      $("#notes-list" ).html(notesList.renderShortNotesList());
+      $("#whole-notes").show()
+      $("#whole-notes").html(notesList.renderWholeNote(obj))
     }
 
 
     function selectingANote(){
       $('ul#notes-list').on("click",".note", function(e){
         e.preventDefault()
+        $("#whole-notes").show()
+        $(".new-note").hide()
          if (e.target === e.currentTarget){
            return;
          }
-        //  $( "#add-edit-button" ).remove('<button type="button" id="edit-a-note">Edit</button>')
         let idizzle = parseInt(e.target.dataset.id)
         adapter.getOneNote(idizzle, successCallbackGetWholeNote)
       })
@@ -56,7 +64,7 @@ function createNote() {
 
     function successCallbackGetWholeNote(data){
       let noteList = new NotesList()
-      $( "#whole-notes" ).html(noteList.renderWholeNote(data))
+      $("#whole-notes").html(noteList.renderWholeNote(data))
       $( "#editing-notes" ).html(noteList.renderEditNote(data))
     }
 
@@ -69,45 +77,48 @@ function createNote() {
     }
 
     function sendChangesToDB(){
-      let noteList = new NotesList()
-      $("#editing-notes").on("click","#edit-note", function(e){
+      $("#editing-notes").on("click", "#send-edited-note", function(e){
         e.preventDefault()
         let idizzle = parseInt(e.target.dataset.id)
-        let noteTitle = $('#edit-note #noteTitle').val()
+        let noteTitle = $('#editing-notes #noteTitle').val()
         let noteBody = $('#myTextArea').val()
-        let newObj = {
-                      user_id: 1,
-                      title: noteTitle,
-                      body: noteBody
-                    }
-        adapter.editNote(idizzle, newObj, editSuccessCallback)
+        adapter.editNote(idizzle, noteTitle, noteBody, editSuccessCallback)
       })
     }
 
-    function editSuccessCallback(data){
-      alert("yeah!!")
-    }
 
+
+    // function getLastId(data){
+    //   let idizzle = data[data.length-1].id
+    //   let noteTitle = data[data.length-1].title
+    //   let noteBody = data[data.length-1].body
+    //   let obj = {id: idzzle, title: noteTitle, body: noteBody}
+    //   let noteList = new NotesList()
+    //   $("#whole-notes").html(noteList.renderWholeNote(obj))
+    // }
+
+
+
+    // function getLastId(data){
+    //   let idizzle = data[data.length-1].id
+    //   let noteTitle = data[data.length-1].title
+    //   let noteBody = data[data.length-1].body
+    //   let obj = {id: idzzle, title: noteTitle, body: noteBody}
+    //   renderWholeNote(obj)
+    // }
+
+
+    function editSuccessCallback(data){
+      $( "#success" ).show().fadeOut( "slow", function() {
+        });
+        $("#editing-notes").hide()
+    }
 
     function newNoteButtonListener(){
       $('#new-note-btn').on("click", function(e){
         e.preventDefault();
+        $("#whole-notes").hide()
         $(".new-note").show()
+
       })
     }
-
-    // function editNote() {
-    //   $('somewhere').on("submit", function(e) {
-    //     e.preventDefault()
-    //     let noteTitle = $('somewhere').val()
-    //     let noteBody = $('somewhere').val()
-    //     let newObj = {
-    //                   user_id: 1,
-    //                   title: noteTitle,
-    //                   body: noteBody
-    //                   }
-    //     adapter.editNote(ID#, newObj, successCallbackPatch)
-    //     // then render whole note or something like that
-    //
-    //     //need to get a working edit button somehow
-    //   })}

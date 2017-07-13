@@ -29,13 +29,13 @@ class NotesList {
 
    renderEditNote(data){
      return(
-     `<form id="edit-note" data-id=${data.id}>
+     `<form id="edit-this-note" data-id=${data.id}>
        <input type="text" id="noteTitle" value=${data.title}></input></br>
      </form>
      <textarea id="myTextArea" rows="5" cols="40">
        ${data.body}
      </textarea><br>
-     <input type="submit" id="edit-note" data-id=${data.id} value="Save Changes">
+     <input type="submit" id="send-edited-note" data-id=${data.id} value="Save Changes">
      `)
    }
 

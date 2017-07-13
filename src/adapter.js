@@ -7,7 +7,6 @@ class Adapter {
     .then(callback)
     .catch(error => console.log(error))
   }
-  // getNotes(callback){$.get("http://localhost:3000/api/v1/notes",callback)}
 
   postNote(title, noteBody, callback) {
     fetch("http://localhost:3000/api/v1/notes", {
@@ -27,7 +26,6 @@ class Adapter {
     .catch(error => console.log(error))
   }
 
-
   getOneNote(idizzle, callback){
     let url = "http://localhost:3000/api/v1/notes/"
     fetch(url + idizzle)
@@ -36,12 +34,17 @@ class Adapter {
     .catch(error => console.log(error))
   }
 
-  editNote(idizzle, editedPost, callback){
+  editNote(idizzle, noteTitle, noteBody, callback){
     let url = `http://localhost:3000/api/v1/notes/${idizzle}`
     fetch(url, {
+
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(editedPost)
+      body: JSON.stringify({
+        user_id: 1,
+        title: noteTitle,
+        body: noteBody
+      })
     })
     .then(response => response.json())
     .then(function(data){
