@@ -20,13 +20,21 @@ class Adapter {
       })
     })
     .then(response => response.json())
+    .then(function(data){
+      console.log(data.id)
+    })
     .then(callback)
     .catch(error => console.log(error))
   }
-}
 
-// const notesList = new NotesList()
-// const adapter = new Adapter()
-//
-//  $(document).ready(
-//    function(){
+
+  getOneNote(idizzle, callback){
+    let url = "http://localhost:3000/api/v1/notes/"
+    fetch(url + idizzle)
+    .then(response => response.json())
+    .then(callback)
+    .catch(error => console.log(error))
+  }
+
+
+}

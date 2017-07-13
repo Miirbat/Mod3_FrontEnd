@@ -25,28 +25,45 @@
     </script>
 
     <div class="ui bottom attached segment pushable">
-      <div class="ui visible inverted left vertical sidebar menu">
-        <a class="item">
+
+      <div id='side-bar' class="ui visible inverted left vertical sidebar menu">
+
+        <style>
+        #robot-img{
+        left: 20px
+        }
+        </style>
+
+
+      <div id='robot-img' class="item">
+          <img src="https://robohash.org/NOI.png?set=set2&size=150x150" alt="Smiley face">
+      </div>
+
+        <!-- <a class="item">
           <i class="home icon"></i>
-          Home
-        </a>
+              Home
+          </a>
+
         <a class="item">
           <i class="write icon" id=""></i>
-          Create New Note
-        </a>
+            Create New Note
+          </a>
+
         <a class="item">
           <i class="browser icon"></i>
-          All Your Notes
+            All Your Notes
+          </a> -->
+
           <ul id="notes-list">
           </ul>
-        </a>
+
       </div>
 
       <div class="pusher">
         <div class="ui basic segment">
+
           <h3 class="ui header">Create a new note</h3>
             <div class="new-note">
-
               <form id="create-note">
                 <label>Title</label><br>
                 <input type="text" id="noteTitle"></input><br>
@@ -56,12 +73,14 @@
               </form>
             </div>
 
-            <div id="one-note">
+            <div id="whole-notes">
+
             </div>
+
+
           </div>
         </div>
       </div>
-
 
 
   </body>
