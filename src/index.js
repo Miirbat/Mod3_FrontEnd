@@ -15,6 +15,7 @@ $(document).ready(
   editEventListener()
   sendChangesToDB()
   showHomeImg()
+  deleteNote()
 })
 
 
@@ -81,6 +82,11 @@ function createNote() {
       })
     }
 
+    function editSuccessCallback(data){
+      $("#success").show().fadeOut( "slow", function() {});
+      $("#editing-notes").hide()
+    }
+
     function sendChangesToDB(){
       $("#editing-notes").on("click", "#send-edited-note", function(e){
         e.preventDefault()
@@ -91,15 +97,6 @@ function createNote() {
       })
     }
 
-    // function getLastId(data){
-    //   let idizzle = data[data.length-1].id
-    //   let noteTitle = data[data.length-1].title
-    //   let noteBody = data[data.length-1].body
-    //   let obj = {id: idzzle, title: noteTitle, body: noteBody}
-    //   let noteList = new NotesList()
-    //   $("#whole-notes").html(noteList.renderWholeNote(obj))
-    // }
-
 
     // function getLastId(data){
     //   let idizzle = data[data.length-1].id
@@ -108,12 +105,6 @@ function createNote() {
     //   let obj = {id: idzzle, title: noteTitle, body: noteBody}
     //   renderWholeNote(obj)
     // }
-
-    function editSuccessCallback(data){
-      $( "#success" ).show().fadeOut( "slow", function() {
-        });
-        $("#editing-notes").hide()
-    }
 
     function newNoteButtonListener(){
       $('#new-note-btn').on("click", function(e){
@@ -133,4 +124,26 @@ function createNote() {
         $(".new-note").hide()
         $("#home-img").show()
       })
+    }
+
+    function deleteSuccessCallback () {
+      $("#whole-notes").hide()
+      $("#home-img").show()
+      adapter.getNotes(successDeletedNote)
+    }
+
+    function deleteNote(){
+      $('#whole-notes').on("click",'#delete-note', function(e){
+        e.preventDefault()
+        let idizzle = parseInt(e.target.dataset.id)
+        adapter.deleteNote(idizzle, deleteSuccessCallback)
+      })
+    }
+
+    function successDeletedNote(data){
+      let notesList = new NotesList()
+      data.forEach(noteItem => {
+          notesList.addNote(noteItem.title, noteItem.body, noteItem.id)
+      })
+      $("#notes-list" ).html(notesList.renderShortNotesList());
     }

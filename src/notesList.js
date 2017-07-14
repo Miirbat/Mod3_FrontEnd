@@ -17,7 +17,9 @@ class NotesList {
         <a class="whole-note" data-id=${data.id} >
             <b id="note-title">${data.title}</b><br>
             <span id="note-body">${data.body}</span><br>
-            <input type="submit" id="edit-note" data-id=${data.id} value="Edit">
+            <br><Br><Br>
+            <button id="edit-note" data-id=${data.id}>Edit</button>
+            <button id="delete-note" data-id=${data.id}>Delete</button>
         </a>
       `)
      }
@@ -35,7 +37,7 @@ class NotesList {
      <textarea id="myTextArea" rows="5" cols="40">
        ${data.body}
      </textarea><br>
-     <input type="submit" id="send-edited-note" data-id=${data.id} value="Save Changes">
+     <button id="send-edited-note" data-id=${data.id}>Save Change</button>
      `)
    }
 

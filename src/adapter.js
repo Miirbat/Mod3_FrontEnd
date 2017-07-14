@@ -54,5 +54,13 @@ class Adapter {
     .catch(error => console.log(error))
   }
 
+  deleteNote(idizzle, callback) {
+    const url = `http://localhost:3000/api/v1/notes/${idizzle}`
+    fetch(url, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(callback)
+  }
 
 }
