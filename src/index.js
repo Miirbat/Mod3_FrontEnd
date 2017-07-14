@@ -4,20 +4,24 @@ const adapter = new Adapter()
 $(document).ready(
   function(){
   $(".new-note").hide()
+  $("#whole-note").hide()
   $("#editing-notes").hide()
   $("#success").hide()
+  $("#home-img").hide()
   newNoteButtonListener()
   createNote()
   adapter.getNotes(successCallbackGet)
   selectingANote()
   editEventListener()
   sendChangesToDB()
+  showHomeImg()
 })
 
 
 function createNote() {
   $('#create-note').on("submit", function(e) {
     e.preventDefault()
+    $("#home-img").hide()
     let noteTitle = $('#create-note #noteTitle').val()
     let noteBody = $('#create-note #noteBody').val()
     adapter.postNote(noteTitle, noteBody, successCallbackPost)
@@ -51,8 +55,10 @@ function createNote() {
     function selectingANote(){
       $('ul#notes-list').on("click",".note", function(e){
         e.preventDefault()
-        $("#whole-notes").show()
+        $("#home-img").hide()
+        $("#editing-notes").hide()
         $(".new-note").hide()
+        $("#whole-notes").show()
          if (e.target === e.currentTarget){
            return;
          }
@@ -61,17 +67,16 @@ function createNote() {
       })
     }
 
-
     function successCallbackGetWholeNote(data){
       let noteList = new NotesList()
       $("#whole-notes").html(noteList.renderWholeNote(data))
       $( "#editing-notes" ).html(noteList.renderEditNote(data))
     }
 
-
     function editEventListener(){
       $('#whole-notes').on("click",'#edit-note', function(e){
         e.preventDefault()
+        $('#whole-notes').hide()
         $("#editing-notes").show()
       })
     }
@@ -86,8 +91,6 @@ function createNote() {
       })
     }
 
-
-
     // function getLastId(data){
     //   let idizzle = data[data.length-1].id
     //   let noteTitle = data[data.length-1].title
@@ -98,7 +101,6 @@ function createNote() {
     // }
 
 
-
     // function getLastId(data){
     //   let idizzle = data[data.length-1].id
     //   let noteTitle = data[data.length-1].title
@@ -106,7 +108,6 @@ function createNote() {
     //   let obj = {id: idzzle, title: noteTitle, body: noteBody}
     //   renderWholeNote(obj)
     // }
-
 
     function editSuccessCallback(data){
       $( "#success" ).show().fadeOut( "slow", function() {
@@ -117,8 +118,19 @@ function createNote() {
     function newNoteButtonListener(){
       $('#new-note-btn').on("click", function(e){
         e.preventDefault();
+        $("#home-img").hide()
+        $("#editing-notes").hide()
         $("#whole-notes").hide()
         $(".new-note").show()
+      })
+    }
 
+    function showHomeImg(){
+      $('#home-button').on("click", function(e){
+        e.preventDefault()
+        $("#whole-notes").hide()
+        $("#editing-notes").hide()
+        $(".new-note").hide()
+        $("#home-img").show()
       })
     }

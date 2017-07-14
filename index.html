@@ -9,6 +9,7 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
     <script src="semantic/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script type="text/javascript" src='src/notesList.js'></script>
     <script type="text/javascript" src='src/note.js'></script>
     <script type="text/javascript" src='src/adapter.js'></script>
@@ -49,8 +50,8 @@
           left: 20x;
         }
 
-        #edit-a-note{
-          background-color: #4CAF50;
+        #home-button{
+          background-color: #4CBF55;
           border: none;
           color: white;
           padding: 15px 32px;
@@ -73,21 +74,17 @@
           <i class="home icon"></i>
               Home
           </a>
-
         <a class="item">
           <i class="write icon" id=""></i>
             Create New Note
           </a>
-
         <a class="item">
           <i class="browser icon"></i>
             All Your Notes
           </a> -->
 
+          <button type="button" id="home-button">Home</button>
           <button type="button" id="new-note-btn">New Note</button>
-          <br>
-
-          <br>
 
           <ul id="notes-list">
           </ul>
@@ -107,9 +104,12 @@
               </form>
             </div>
 
+          <div id="home-img">
+            <img src="/src/future_world.jpg" alt="Smiley face" height=100% width=100%>
+          </div>
 
-            <div id="whole-notes">
-            </div>
+          <div id="whole-notes">
+          </div>
 
             <div id="editing-notes">
             </div>

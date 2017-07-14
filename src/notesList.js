@@ -22,9 +22,9 @@ class NotesList {
       `)
      }
 
-    //  renderEditButton(){
-    //    return(`<button type="button" id="edit-a-note">Edit</button>`)
-    //  }
+     renderEditButton(){
+       return(`<button type="button" id="edit-a-note">Edit</button>`)
+     }
 
 
    renderEditNote(data){
