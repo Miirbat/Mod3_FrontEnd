@@ -27,7 +27,7 @@ class Adapter {
   }
 
   getOneNote(idizzle, callback){
-    let url = "http://localhost:3000/api/v1/notes/"
+    const url = "http://localhost:3000/api/v1/notes/"
     fetch(url + idizzle)
     .then(response => response.json())
     .then(callback)
@@ -35,7 +35,7 @@ class Adapter {
   }
 
   editNote(idizzle, noteTitle, noteBody, callback){
-    let url = `http://localhost:3000/api/v1/notes/${idizzle}`
+    const url = `http://localhost:3000/api/v1/notes/${idizzle}`
     fetch(url, {
 
       method: 'PATCH',

@@ -51,10 +51,9 @@ function createNote() {
   })
 }
 
-
-function successCallbackPost() {
-  adapter.getNotes(successCallbackGet)
-}
+  function successCallbackPost() {
+    adapter.getNotes(successCallbackGet)
+  }
 
   function successCallbackGet(data){
     let notesList = new NotesList()
@@ -70,7 +69,6 @@ function successCallbackPost() {
     $("#whole-notes").show()
     $("#whole-notes").html(notesList.renderWholeNote(obj))
   }
-
 
 function selectingANote(){
   $('ul#notes-list').on("click",".note", function(e){
@@ -116,7 +114,6 @@ function editNote(){
   })
 }
 
-
 // function getLastId(data){
 //   let idizzle = data[data.length-1].id
 //   let noteTitle = data[data.length-1].title
@@ -124,8 +121,6 @@ function editNote(){
 //   let obj = {id: idzzle, title: noteTitle, body: noteBody}
 //   renderWholeNote(obj)
 // }
-
-
 
 function deleteNote(){
   $('#whole-notes').on("click",'#delete-note', function(e){
